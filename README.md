@@ -15,83 +15,47 @@ mvn clean package
 ```
 
 ```
-<plugin>
-   <groupId>org.apache.maven.plugins</groupId>
-   <artifactId>maven-shade-plugin</artifactId>
-   <version>3.2.4</version>
-   <executions>
-      <execution>
-         <phase>package</phase>
-         <goals>
-            <goal>shade</goal>
-         </goals>
-         <configuration>
-            <transformers>
-               <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>${main.class}</mainClass>
-               </transformer>
-            </transformers>
-         </configuration>
-      </execution>
-   </executions>
-</plugin>
 
-<plugin>
-   <groupId>org.apache.maven.plugins</groupId>
-   <artifactId>maven-jar-plugin</artifactId>
-   <version>3.2.2</version>
-   <configuration>
-      <skipIfEmpty>true</skipIfEmpty>
-      <archive>
-         <manifestEntries>
-            <addClasspath>true</addClasspath>
-            <Main-Class>${main.class}</Main-Class>
-            <Program-Version>${project.version}</Program-Version>
-            <Implementation-Version>${project.version}</Implementation-Version>
-         </manifestEntries>
-      </archive>
-      <includes>
-         <include>**/*.class</include>
-      </includes>
-   </configuration>
-</plugin>
 
-<plugin>
-   <groupId>org.openjfx</groupId>
-   <artifactId>javafx-maven-plugin</artifactId>
-   <version>0.0.8</version>
-   <configuration>
-      <mainClass>${main.class}</mainClass>
-   </configuration>
-</plugin>
+<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<release>17</release>
+				</configuration>
+			</plugin>
 
-<plugin>
-   <groupId>io.github.fvarrui</groupId>
-   <artifactId>javapackager</artifactId>
-   <version>1.7.5</version>
-   <configuration>
-      <mainClass>${main.class}</mainClass>
-      <name>JavaFxApp</name>
-      <bundleJre>true</bundleJre>
-      <generateInstaller>true</generateInstaller>
-      <platform>windows</platform>
-   </configuration>
-   <executions>
-      <execution>
-         <id>windows</id>
-         <phase>package</phase>
-         <goals>
-            <goal>package</goal>
-         </goals>
-      </execution>
-   </executions>
-</plugin>
+			<plugin>
+				<groupId>io.github.fvarrui</groupId>
+				<artifactId>javapackager</artifactId>
+				<version>1.7.5</version>
+				<configuration>
+					<mainClass>${main.class}</mainClass>
+					<name>JavaFxApp</name>
+					<bundleJre>true</bundleJre>
+					<generateInstaller>true</generateInstaller>
+					<platform>windows</platform>
+				</configuration>
+				<executions>
+					<execution>
+						<id>windows</id>
+						<phase>package</phase>
+						<goals>
+							<goal>package</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 ```
 
 Packaged directory
 target\JavaFxApp\JavaFxApp.exe can be directly double-click to run
-
-JavaPackagerDemo.jar can be executed through commands
 
 ```
 java -jar .\target\JavaPackagerDemo.jar
