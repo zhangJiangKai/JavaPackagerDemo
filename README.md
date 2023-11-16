@@ -8,7 +8,7 @@ Mainly used to demonstrate the basic packaging process
 
 Add the following `plugin` tag to your `pom.xml`:
 
-In the introduction of the plugin homepage, only a single plugin was introduced. I don't know why the packaging results cannot run. After adjustment, it was found that the above plugins were used simultaneously. Simply execute the
+In the introduction of the [plugin](https://github.com/fvarrui/JavaPackager) homepage, only a single plugin was introduced. I don't know why the packaging results cannot run. After adjustment, it was found that the above plugins were used simultaneously. Simply execute the
 
 ```
 mvn clean package
